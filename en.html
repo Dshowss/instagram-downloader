@@ -139,11 +139,11 @@
                   var str = "";
                   str += '<div class="card text-center">' + '<img src="' + profilresmi + '" alt="profile-pic" class="profile" style="width:200px;border-radius:5px">' + '<br />';
                   str += '<p class="font-weight-light">' + tamad + '  (' + kullaniciadi + ')' + '</p>' + '<p class="job-title">' + biografi + '</p>';
-                  str += '<a rel="nofollow" href="' + profilresmihd + '&amp;dl=1' + '" class="downloadbutton btn">'+"Profil Fotoğrafını İndir"+ '</a>';
+                  str += '<a rel="nofollow" href="' + profilresmihd + '&amp;dl=1' + '" class="downloadbutton btn">'+"Download Profile Photo"+ '</a>';
                   str += '<div class="container-fluid">' + '<div style="display: inline-flex">';
-                  str += '<div>' + '<h3 class="box-header">' + gonderisayisi + '</h3>' + '<p class="followers">' + "Gonderiler" + '</p>';
-                  str += '</div>' + '&ensp;&ensp;' + '<div>' + '<h3>' + takipettigi + '</h3>' + '<p class="followers">' + "Takip Ettiği" + '</p>' + '</div>' +'&ensp;&ensp;';
-                  str += '<div>' + '<h3>' + takipedenler + '</h3>' + '<p class="followers">' + "Takip Edenler" + '</p>' + '</div>' + '</div>' + '</div>' + '</div>';
+                  str += '<div>' + '<h3 class="box-header">' + gonderisayisi + '</h3>' + '<p class="followers">' + "Posts" + '</p>';
+                  str += '</div>' + '&ensp;&ensp;' + '<div>' + '<h3>' + takipettigi + '</h3>' + '<p class="followers">' + "Following" + '</p>' + '</div>' +'&ensp;&ensp;';
+                  str += '<div>' + '<h3>' + takipedenler + '</h3>' + '<p class="followers">' + "Followers" + '</p>' + '</div>' + '</div>' + '</div>' + '</div>';
                   $('#profilediv').append(str);
                 
                  
@@ -171,41 +171,25 @@
                   var gonderitipi = veri.graphql.shortcode_media.__typename;
                   if (gonderitipi == "GraphVideo") {
                       gonderiurl = veri.graphql.shortcode_media.video_url;
-                      text = "Videoyu İndir";
+                      text = "Download Video";
                       degisecekstr += '<video id="video" width="100%" autoplay="autoplay" loop="loop" muted="muted" controls="" __idm_id__="909815809">' + '<source src="' + gonderiurl + '" type="video/mp4">' + '</video>';
                   }
                   if (gonderitipi == "GraphImage") {
                       gonderiurl = veri.graphql.shortcode_media.display_url;
-                      text = "Fotoğrafı İndir";
+                      text = "Download Photo";
                       degisecekstr += '<img src="' + gonderiurl + '" style="width:100%;border-radius:5px;" class="profilepic img-circle" >';
                   }
                   if (gonderitipi == "GraphSidecar") {
                       gonderiurl = veri.graphql.shortcode_media.display_url;
-                      text = "Fotoğrafı İndir";
+                      text = "Download Photo";
                       degisecekstr += '<img src="' + gonderiurl + '" style="width:100%;border-radius:5px;" class="downloadimage" >';
                   } var str = "";
 
-                 /* str += '<div class="card text-center">' + '<img src="' + gonderiurl + '" alt="profile-pic" class="profile" style="border-radius:5px">' + '<br />';
-                  str += '<p class="font-weight-light">' + fullname + '  (' + username + ')' + '</p>' + '<p class="job-title">' + biografi + '</p>';
-                  str += '<a rel="nofollow" href="' + profilpictureurl + '&amp;dl=1' + '" class="downloadbutton btn">'+"Fotoğrafı İndir"+ '</a>';
-                  str += '<div class="container-fluid">' + '<div style="display: inline-flex">';
-                  str += '<div>' + '<h3 class="box-header">' + gonderisayisi + '</h3>' + '<p class="followers">' + "Gonderiler" + '</p>';
-                  str += '</div>' + '&ensp;&ensp;' + '<div>' + '<h3>' + takipettigi + '</h3>' + '<p class="followers">' + "Takip Ettiği" + '</p>' + '</div>' +'&ensp;&ensp;';
-                  str += '<div>' + '<h3>' + takipedenler + '</h3>' + '<p class="followers">' + "Takip Edenler" + '</p>' + '</div>' + '</div>' + '</div>' + '</div>';
-                  */
                   str += '<div id="data">' + '<center>';
                   str += degisecekstr;
                   str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '<br>' + '"class="downloadbutton btn btn-group-justified">' + text + '</a>';
                   str += '</div>' + '</center>';
-                  /*str += '<div class="card text-center">' + '<img src="' + gonderiurl + '" alt="profile-pic" class="profile" style="border-radius:5px;width:150px;">' + '<br />';
-                  str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '" class="downloadbutton btn btn-group-justified">' + text + '</a>';*/
-                 /* str += '<a href="/"><img class="profilepic img-circle" src="' + profilpictureurl + '">' + '</a>';
-                  str += '<a href="#" class="profilename">' + fullname + '</a>' + '<br>';
-                  str += '<a href="#" class="username">' + '<span id="username" class="text-muted">' + username + '</span>' + '</a>' + '</div>';
-                  str += '<div id="data">';
-                  str += degisecekstr;
-                  str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '" class="downloadbutton btn btn-group-justified">' + text + '</a>';
-                  */str += '</div>';
+                  str += '</div>';
                   $('#videodiv').append(str);
               })
           });
