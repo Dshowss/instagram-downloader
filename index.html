@@ -1,0 +1,18 @@
+<script>
+var type=navigator.appName
+if (type=="Netscape")
+var lang = navigator.language
+else
+var lang = navigator.userLanguage
+
+var lang = lang.substr(0,2)
+
+if (lang == "en")
+window.location.replace('/en.html')
+
+else if (lang == "tr")
+window.location.replace('/tr.html')
+
+else
+window.location.replace('/en.html')
+</script>
