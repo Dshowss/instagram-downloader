@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="ltr" lang="tr" dir="ltr">
+   <head>
+      <title>Instagram Downloader – Online Instagram Foto ve Video indiricisi</title>
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="css/styles-fd42718d2a.css">
+      <link rel="shortcut icon" href="https://instagram-brand.com/wp-content/uploads/2016/11/Instagram_AppIcon_Aug2017.png?w=300"/>
+      <style type="text/css">
+        .js div#preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        background: #fff3ff url('https://i.pinimg.com/originals/fc/a6/b0/fca6b039de48f77a42c71747049d02ed.gif') no-repeat center center;
+        }
+     </style>
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+        
+            $(window).load(function () {
+                $('#preloader').fadeOut('slow', function () { $(this).remove(); });
+            });
+        
+        });
+     </script>
+    </head>
+   <body class="js" >
+    <div id="preloader"></div>
+      <div class="top" id="top">
+         <div class="inner">
+            <a class="logo" href="/">
+            Instagram <span class="logo__core">Downloader</span></a>
+            <nav class="top__nav">
+               <ul>
+                  <li class="menu-item filled">
+                     <span class="has-items" role="button" tabindex="0" aria-expanded="false" aria-describedby="wcag-lang">Türkçe</span>
+                     <ul>
+                        <li><a href="/en/">English</a></li>
+                        <li><a class="current" href="/tr/">Türkçe</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </div>
+      <div class="container-top">
+         <h1 class="title">Profil Fotoğrafı</h1>
+         <form class="js-downloader downloader" action="/api/get" method="post" onsubmit="event.preventDefault();">
+            <div class="downloader__group"><input class="js-downloader__input downloader__input" type="text" id="kullaniciAdi" name="url" placeholder="milliebobbybrown"></div>
+            <div class="downloader__actions"><span class="js-clear downloader__clear icon-close" tabindex="0" role="button"></span><button id="goruntule" class="button downloader__btn">Fetch</button></div>
+         </form>
+         <div class="row" style="margin-top:20px">
+            <center>
+            <div class="grid-7" id="profilediv">
+            </div>
+           </center>
+    </div>
+         <div class="js-media media"></div>
+      </div>
+      <div class="container-top">
+        <h1 class="title">Fotoğraf, Video, Reels, IGTV</h1>
+        <form class="js-downloader downloader" action="/api/get" method="post" onsubmit="event.preventDefault();">
+           <div class="downloader__group"><input class="js-downloader__input downloader__input" type="text" id="picvid" name="url" placeholder="https://www.instagram.com/p/CKuJwK5g4oz/"><label class="downloader__help" for="instalink">Çoklu fotoğraflarda sadece ilk fotoğraf gösterilir.</label></div>
+           <div class="downloader__actions"><span class="js-clear downloader__clear icon-close" tabindex="0" role="button"></span><button id="indir" class="button downloader__btn">Fetch</button></div>
+        </form>
+        <div class="row" id="videodiv" style="margin-top:20px">
+        </div>
+     </div>
+      <footer class="footer">
+         <div class="inner">
+            <nav class="footer__links">
+               <ul class="footer-links__group">
+                  <li class="list-title">Bilgi</li>
+                  <li><a href="/#" style="text-decoration:none;">Gizlilik &amp; Koşullar</a></li>
+               </ul>
+               <div class="follow"><span class="follow__label">Yaratıcılar / Geliştiriciler</span>Yakub K. <a target="_blank" rel="noreferrer" href="https://github.com/yakubkrh" style="text-decoration:none;">GitHub</a><br>Eleven <a target="_blank" rel="noreferrer" href="https://github.com/elevenvac" style="text-decoration:none;">GitHub</a></div>
+            </nav>
+            <div class="footer__about">
+               <div class="copy">Bu site Yakub K. tarafından yapılıp Eleven tarafından geliştirilmiştir (tasarım ve iki üç küçük şeyler). Tabikide Eksikleri vardır ve Gelişime açıktır. Herkes bu sitenin açık kaynağına gidip kendine göre düzenlemeler yapıp, geliştirebilir. <a target="_blank" rel="noreferrer" href="https://github.com/yakubkrh/instagramDownloader" style="text-decoration:none;">Sitenin ilk hali</a> & <a target="_blank" rel="noreferrer" href="https://github.com/elevenvac/instagram-downloader" style="text-decoration:none;">Sitenin bu hali</a></div>
+            </div>
+         </div>
+      </footer>
+      <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" media="print" onload="this.media='all'">
+      <script src="js/jquery-1.12.4.js"></script>
+      <script src="js/jquery-ui.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script>
+          $(function () {
+              $("#kullaniciAdi").autocomplete({
+                  source: function (istek, sonuc) {
+                      $.ajax({
+                          url: "https://www.instagram.com/web/search/topsearch/?context=user&count=10&query=" + istek.term,
+                          success: function (data) {
+                              var obj = [];
+                              $.each(data.users, function (i, yeni) {
+                                  if (obj.indexOf(yeni.user.full_name) === -1) {
+                                      obj.push({
+                                          id: yeni.user.pk,
+                                          label: yeni.user.full_name,
+                                          title: yeni.user.username
+                                      });
+                                  }
+                              });
+                              sonuc(obj);
+                          }
+                      });
+                  },
+                  minLength: 2,
+                  select: function (event, ui) {
+                      event.preventDefault();
+                      $("#kullaniciAdi").val(ui.item.title);
+                  }
+              });
+          });
+          $('#goruntule')['click'](function () {
+              var kullaniciadi = $('#kullaniciAdi').val();
+              var url = "https://www.instagram.com/" + kullaniciadi + "/?__a=1";
+              $.getJSON(url, function (veri) {
+                  $('#profilediv').empty();
+                  var biografi = veri.graphql.user.biography;
+                  biografi = biografi.replace(/\r\n/g, '<br />').replace(/[\r\n]/g, '<br />');
+                  
+                  var takipettigi = veri.graphql.user.edge_follow.count;
+                  var takipedenler = veri.graphql.user.edge_followed_by.count;
+                  var gonderisayisi = veri.graphql.user.edge_owner_to_timeline_media.count;
+                  var tamad = veri.graphql.user.full_name;
+                  var kullaniciadi = veri.graphql.user.username;
+               
+                  var profilresmi = veri.graphql.user.profile_pic_url;
+                  var profilresmihd = veri.graphql.user.profile_pic_url_hd;
+                  var txt = "Profili Gör";
+                  var str = "";
+                  str += '<div class="card text-center">' + '<img src="' + profilresmi + '" alt="profile-pic" class="profile" style="width:200px;border-radius:5px">' + '<br />';
+                  str += '<p class="font-weight-light">' + tamad + '  (' + kullaniciadi + ')' + '</p>' + '<p class="job-title">' + biografi + '</p>';
+                  str += '<a rel="nofollow" href="' + profilresmihd + '&amp;dl=1' + '" class="downloadbutton btn">'+"Profil Fotoğrafını İndir"+ '</a>';
+                  str += '<div class="container-fluid">' + '<div style="display: inline-flex">';
+                  str += '<div>' + '<h3 class="box-header">' + gonderisayisi + '</h3>' + '<p class="followers">' + "Gonderiler" + '</p>';
+                  str += '</div>' + '&ensp;&ensp;' + '<div>' + '<h3>' + takipettigi + '</h3>' + '<p class="followers">' + "Takip Ettiği" + '</p>' + '</div>' +'&ensp;&ensp;';
+                  str += '<div>' + '<h3>' + takipedenler + '</h3>' + '<p class="followers">' + "Takip Edenler" + '</p>' + '</div>' + '</div>' + '</div>' + '</div>';
+                  $('#profilediv').append(str);
+                
+                 
+                
+              })
+          });
+          $('#indir')['click'](function (e) {
+              var picvidlink = $('#picvid').val();
+              var yenilink = "";
+              var a = picvidlink;
+              var temp = new Array();
+              temp = a.split("?igshid=");
+              yenilink = temp[0];
+              var qs = yenilink + '?__a=1';
+              $.getJSON(qs, function (veri) {
+                  $('#videodiv').empty();
+                  console.log(veri.graphql.shortcode_media.owner.profile_pic_url);
+                  var profilpictureurl = veri.graphql.shortcode_media.owner.profile_pic_url;
+                  var fullname = veri.graphql.shortcode_media.owner.full_name;
+                  var username = veri.graphql.shortcode_media.owner.username;
+
+                  var gonderiurl = "";
+                  var text = "";
+                  var degisecekstr = "";
+                  var gonderitipi = veri.graphql.shortcode_media.__typename;
+                  if (gonderitipi == "GraphVideo") {
+                      gonderiurl = veri.graphql.shortcode_media.video_url;
+                      text = "Videoyu İndir";
+                      degisecekstr += '<video id="video" width="100%" autoplay="autoplay" loop="loop" muted="muted" controls="" __idm_id__="909815809">' + '<source src="' + gonderiurl + '" type="video/mp4">' + '</video>';
+                  }
+                  if (gonderitipi == "GraphImage") {
+                      gonderiurl = veri.graphql.shortcode_media.display_url;
+                      text = "Fotoğrafı İndir";
+                      degisecekstr += '<img src="' + gonderiurl + '" style="width:100%;border-radius:5px;" class="profilepic img-circle" >';
+                  }
+                  if (gonderitipi == "GraphSidecar") {
+                      gonderiurl = veri.graphql.shortcode_media.display_url;
+                      text = "Fotoğrafı İndir";
+                      degisecekstr += '<img src="' + gonderiurl + '" style="width:100%;border-radius:5px;" class="downloadimage" >';
+                  } var str = "";
+
+                 /* str += '<div class="card text-center">' + '<img src="' + gonderiurl + '" alt="profile-pic" class="profile" style="border-radius:5px">' + '<br />';
+                  str += '<p class="font-weight-light">' + fullname + '  (' + username + ')' + '</p>' + '<p class="job-title">' + biografi + '</p>';
+                  str += '<a rel="nofollow" href="' + profilpictureurl + '&amp;dl=1' + '" class="downloadbutton btn">'+"Fotoğrafı İndir"+ '</a>';
+                  str += '<div class="container-fluid">' + '<div style="display: inline-flex">';
+                  str += '<div>' + '<h3 class="box-header">' + gonderisayisi + '</h3>' + '<p class="followers">' + "Gonderiler" + '</p>';
+                  str += '</div>' + '&ensp;&ensp;' + '<div>' + '<h3>' + takipettigi + '</h3>' + '<p class="followers">' + "Takip Ettiği" + '</p>' + '</div>' +'&ensp;&ensp;';
+                  str += '<div>' + '<h3>' + takipedenler + '</h3>' + '<p class="followers">' + "Takip Edenler" + '</p>' + '</div>' + '</div>' + '</div>' + '</div>';
+                  */
+                  str += '<div id="data">' + '<center>';
+                  str += degisecekstr;
+                  str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '<br>' + '"class="downloadbutton btn btn-group-justified">' + text + '</a>';
+                  str += '</div>' + '</center>';
+                  /*str += '<div class="card text-center">' + '<img src="' + gonderiurl + '" alt="profile-pic" class="profile" style="border-radius:5px;width:150px;">' + '<br />';
+                  str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '" class="downloadbutton btn btn-group-justified">' + text + '</a>';*/
+                 /* str += '<a href="/"><img class="profilepic img-circle" src="' + profilpictureurl + '">' + '</a>';
+                  str += '<a href="#" class="profilename">' + fullname + '</a>' + '<br>';
+                  str += '<a href="#" class="username">' + '<span id="username" class="text-muted">' + username + '</span>' + '</a>' + '</div>';
+                  str += '<div id="data">';
+                  str += degisecekstr;
+                  str += '<a rel="nofollow" href="' + gonderiurl + '&amp;dl=1' + '" class="downloadbutton btn btn-group-justified">' + text + '</a>';
+                  */str += '</div>';
+                  $('#videodiv').append(str);
+              })
+          });
+      </script>
+    </body>
+</html>
