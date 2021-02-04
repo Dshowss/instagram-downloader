@@ -52,7 +52,7 @@
       </div>
       <div class="container-top">
          <h1 class="title">Profil Fotoğrafı</h1>
-         <form class="js-downloader downloader" action="/api/get" method="post" onsubmit="event.preventDefault();">
+         <form class="js-downloader downloader" method="post" onsubmit="event.preventDefault();">
             <div class="downloader__group"><input required="" class="js-downloader__input downloader__input" type="text" id="kullaniciAdi" name="url" placeholder="milliebobbybrown"></div>
             <div class="downloader__actions"><span class="js-clear downloader__clear icon-close" tabindex="0" role="button"></span><button id="goruntule" class="button downloader__btn">Fetch</button></div>
          </form>
@@ -66,7 +66,7 @@
       </div>
       <div class="container-top">
         <h1 class="title">Fotoğraf, Video, Reels, IGTV</h1>
-        <form class="js-downloader downloader" action="/api/get" method="post" onsubmit="event.preventDefault();">
+        <form class="js-downloader downloader" method="post" onsubmit="event.preventDefault();">
            <div class="downloader__group"><input required="" class="js-downloader__input downloader__input" type="text" id="picvid" name="url" placeholder="https://www.instagram.com/p/CKuJwK5g4oz/"><label class="downloader__help" for="instalink">Çoklu fotoğraflarda sadece ilk fotoğraf gösterilir.</label></div>
            <div class="downloader__actions"><span class="js-clear downloader__clear icon-close" tabindex="0" role="button"></span><button id="indir" class="button downloader__btn">Fetch</button></div>
         </form>
