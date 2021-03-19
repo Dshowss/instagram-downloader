@@ -1,4 +1,4 @@
-> Demo: https://instagram-downloader.elevenvac.vercel.app/ 
+> Demo: https://instagram-downloader.elevenvac.vercel.app/  (API OUT OF USE)
 # Instagram Downloader
 ### Contact
 * [Discord](https://discord.gg/T4BMtSu)
