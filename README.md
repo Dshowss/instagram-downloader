@@ -9,7 +9,7 @@
 `CSS` & `HTML`
 
 ## Contributors
-Thanks for contributions: `-`
+Thanks for contributions: `yakubkrh`
 
 ## Installation
 not needed
